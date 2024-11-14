@@ -28,8 +28,6 @@ const AdminTransactionsManagement = lazy(() => import('./pages/admin/transaction
 const AdminUsersManagement = lazy(() => import('./pages/admin/users.js'))
 const AdminCategoriesManagement = lazy(() => import('./pages/admin/categories.js'))
 const NotFoundPage = lazy(() => import('./pages/auth/notFound'))
-const NewCategory = lazy(() => import('./pages/admin/newCategory.js'))
-const EditCategory = lazy(() => import('./pages/admin/editCategory.js'))
 const AdminProfile = lazy(() => import('./pages/admin/adminProfile.js'))
 const UserProfile = lazy(() => import('./pages/user/userProfile.js'))
 const UserStatistics = lazy(() => import('./pages/user/statistics.js'))
@@ -76,8 +74,6 @@ function App() {
                             <Route path='/admin/transactions' element={<AdminTransactionsManagement />} />
                             <Route path='/admin/users' element={<AdminUsersManagement />} />
                             <Route path='/admin/categories' element={<AdminCategoriesManagement />} />
-                            <Route path='/admin/newCategory' element={<NewCategory />} />
-                            <Route path='/admin/editCategory/:categoryId' element={<EditCategory />} />
                             <Route path='/admin/settings' element={<AdminProfile />} />
                         </Route>
 

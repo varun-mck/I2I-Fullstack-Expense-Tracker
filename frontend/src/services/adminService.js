@@ -51,19 +51,6 @@ const getAllcategories = () => {
     )
 }
 
-const addNewcategory = (categoryName, transactionTypeId) => {
-    return axios.post(
-        API_BASE_URL + '/category/new', 
-        {
-            categoryName: categoryName,
-            transactionTypeId: transactionTypeId
-        },
-        {
-            headers: AuthService.authHeader()
-        }
-    )
-}
-
 const updatecategory = (categoryId, categoryName, transactionTypeId) => {
     return axios.put(
         API_BASE_URL + '/category/update', 
@@ -97,7 +84,6 @@ const AdminService = {
     getAllUsers,
     disableOrEnableUser,
     getAllcategories,
-    addNewcategory,
     updatecategory,
     disableOrEnableCategory,
 }

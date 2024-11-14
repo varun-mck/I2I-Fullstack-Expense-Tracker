@@ -58,13 +58,6 @@ function CategoriesTableHeader() {
 
 function CategoriesTableBody({ data, disableOrEnable }) {
 
-    const navigate = useNavigate();
-
-    const onEditClick = (category) => {
-        localStorage.setItem("categoryToEdit", JSON.stringify(category))
-        navigate(`/admin/editCategory/${category.categoryId}`)
-    }
-
     return (
         data.map((item) => {
             return (
@@ -80,11 +73,6 @@ function CategoriesTableBody({ data, disableOrEnable }) {
                     }
 
                     <td style={{ display: 'flex', gap: '5px' }}>
-                        <button
-                            onClick={() => onEditClick(item)}
-                        >
-                            Edit
-                        </button>
                         {
                             (item.enabled) ?
                                 (<button
