@@ -2,7 +2,6 @@ package com.fullStack.expenseTracker.handlers;
 
 import com.fullStack.expenseTracker.dto.reponses.ApiResponseDto;
 import com.fullStack.expenseTracker.enums.ApiResponseStatus;
-import com.fullStack.expenseTracker.exceptions.CategoryAlreadyExistsException;
 import com.fullStack.expenseTracker.exceptions.CategoryNotFoundException;
 import com.fullStack.expenseTracker.exceptions.CategoryServiceLogicException;
 import org.springframework.http.HttpStatus;
@@ -30,15 +29,4 @@ public class CategoryExceptionHandler {
                         new ApiResponseDto<>(ApiResponseStatus.FAILED, HttpStatus.BAD_REQUEST, exception.getMessage())
                 );
     }
-
-
-    @ExceptionHandler(value = CategoryAlreadyExistsException.class)
-    public ResponseEntity<ApiResponseDto<String>> categoryAlreadyExistsExceptionHandler(CategoryAlreadyExistsException exception) {
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(
-                        new ApiResponseDto<>(ApiResponseStatus.FAILED, HttpStatus.CONFLICT, exception.getMessage())
-                );
-    }
-
 }
