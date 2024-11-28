@@ -13,6 +13,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/database_export.sql:/docker-entrypoint-initdb.d/database_export.sql
 
 volumes:
   mysql_data:
