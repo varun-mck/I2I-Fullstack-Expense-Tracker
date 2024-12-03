@@ -1,6 +1,3 @@
-Here’s the `README.md` content in proper Markdown format:
-
-
 # Currency Converter
 
 A FastAPI-based currency conversion application that provides endpoints to fetch currency codes, conversion rates, and perform currency conversions. The application is containerized using Docker for ease of deployment.
