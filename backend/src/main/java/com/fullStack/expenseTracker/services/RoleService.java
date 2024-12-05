@@ -1,10 +1,14 @@
 package com.fullStack.expenseTracker.services;
 
-import com.fullStack.expenseTracker.enums.ERole;
-import com.fullStack.expenseTracker.models.Role;
-import org.springframework.stereotype.Service;
-
-@Service
 public interface RoleService {
-    Role findByName(ERole eRole);
+    
+    /**
+     * Assigns a role to a user.
+     *
+     * @param userId the ID of the user to whom the role will be assigned
+     * @param roleName the name of the role to be assigned to the user
+     * @throws UserNotFoundException if the user with the specified ID is not found
+     * @throws RoleNotFoundException if the role with the specified name is not found
+     */
+    void assignRoleToUser(Long userId, String roleName) throws UserNotFoundException, RoleNotFoundException;
 }
