@@ -1,30 +1,14 @@
 package com.fullStack.expenseTracker.services;
 
-import com.fullStack.expenseTracker.repository.RoleRepository;
-import com.fullStack.expenseTracker.models.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
-
-@Service
-public class RoleService {
-
-    @Autowired
-    private RoleRepository roleRepository;
-
+public interface RoleService {
+    
     /**
-     * Fetches all roles from the database and returns them to the caller.
-     * Implements RoleRepository to perform the database query.
-     * @return List<Role> - list of all roles
+     * Assigns a role to a user.
+     *
+     * @param userId the ID of the user to whom the role will be assigned
+     * @param roleName the name of the role to be assigned to the user
+     * @throws UserNotFoundException if the user with the specified ID is not found
+     * @throws RoleNotFoundException if the role with the specified name is not found
      */
-    public List<Role> getAllRoles() {
-        try {
-            return roleRepository.findAll();
-        } catch (Exception e) {
-            // Log the error for internal tracking purposes, but do not expose internal error details to the caller
-            // Assuming there is a logger in place
-            System.err.println("Error fetching roles: " + e.getMessage());
-            throw new RuntimeException("An error occurred while fetching roles. Please try again later.");
-        }
-    }
+    void assignRoleToUser(Long userId, String roleName) throws UserNotFoundException, RoleNotFoundException;
 }
