@@ -1,91 +1,37 @@
-import axios from "axios";
-import AuthService from "./auth.service";
-import API_BASE_URL from "./auth.config";
+/**
+ * Admin Service
+ * This service handles all admin related API calls.
+ */
 
-const getAllTransactions = (pagenumber, pageSize, searchKey) => {
-    return axios.get(
-        API_BASE_URL + "/transaction/getAll",
-        {
-            headers: AuthService.authHeader(),
+import axios from 'axios';
+
+const BASE_URL = '/api/admin';
+
+/**
+ * Search users service function.
+ * This function calls the backend API to search and fetch users based on the search term provided.
+ * 
+ * @param {string} searchTerm - The term to search users by.
+ * @returns {Promise<Array>} - A promise that resolves to an array of users.
+ */
+export async function searchUsers(searchTerm) {
+    try {
+        const response = await axios.get(`${BASE_URL}/users/search`, {
             params: {
-                pageNumber: pagenumber,
-                pageSize: pageSize,
-                searchKey: searchKey
+                q: searchTerm
             }
+        });
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error('Error fetching users');
         }
-    )
+    } catch (error) {
+        console.error('Error in searchUsers:', error);
+        throw error;
+    }
 }
 
-const getAllUsers = (pagenumber, pageSize, searchKey) => {
-    return axios.get(
-        API_BASE_URL + "/user/getAll",
-        {
-            headers: AuthService.authHeader(),
-            params: {
-                pageNumber: pagenumber,
-                pageSize: pageSize,
-                searchKey: searchKey
-            }
-        }
-    )
-}
-
-const disableOrEnableUser = (userId) => {
-    return axios.delete(
-        API_BASE_URL + "/user/disable",
-        {
-            headers: AuthService.authHeader(),
-            params: {
-                userId: userId
-            }
-        }
-    )
-}
-
-const getAllcategories = () => {
-    return axios.get(
-        API_BASE_URL + '/category/getAll', 
-        {
-            headers: AuthService.authHeader()
-        }
-    )
-}
-
-const updatecategory = (categoryId, categoryName, transactionTypeId) => {
-    return axios.put(
-        API_BASE_URL + '/category/update', 
-        {
-            categoryName: categoryName,
-            transactionTypeId: transactionTypeId
-        },
-        {
-            headers: AuthService.authHeader(),
-            params: {
-                categoryId: categoryId
-            }
-        }
-    )
-}
-
-const disableOrEnableCategory = (categoryId) => {
-    return axios.delete(
-        API_BASE_URL + "/category/delete",
-        {
-            headers: AuthService.authHeader(),
-            params: {
-                categoryId: categoryId
-            }
-        }
-    )
-}
-
-const AdminService = {
-    getAllTransactions,
-    getAllUsers,
-    disableOrEnableUser,
-    getAllcategories,
-    updatecategory,
-    disableOrEnableCategory,
-}
-
-export default AdminService;
+export default {
+    searchUsers,
+};
