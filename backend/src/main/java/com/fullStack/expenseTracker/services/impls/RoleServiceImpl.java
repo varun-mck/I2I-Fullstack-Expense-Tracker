@@ -1,21 +1,38 @@
 package com.fullStack.expenseTracker.services.impls;
 
-import com.fullStack.expenseTracker.services.RoleService;
-import com.fullStack.expenseTracker.enums.ERole;
-import com.fullStack.expenseTracker.models.Role;
 import com.fullStack.expenseTracker.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.fullStack.expenseTracker.services.RoleService;
+import com.fullStack.expenseTracker.models.Role;
 
-@Component
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
 public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
 
     @Override
-    public Role findByName(ERole eRole) {
-        return roleRepository.findByName(eRole)
-                .orElseThrow(() -> new RuntimeException("Role is not found."));
+    public List<Role> getAllRoles() {
+        try {
+            // Fetching all roles from the database
+            List<Role> roles = roleRepository.findAll();
+            
+            // Validation to check if roles are retrieved
+            if (roles == null || roles.isEmpty()) {
+                throw new RuntimeException("No roles found in the database");
+            }
+
+            return roles;
+        } catch (Exception e) {
+            // Logging the exception properly (Consider using a logging framework for production)
+            System.err.println("Error fetching roles: " + e.getMessage());
+            throw new RuntimeException("Failed to fetch roles", e);
+        }
     }
+
 }
